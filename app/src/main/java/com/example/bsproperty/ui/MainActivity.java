@@ -1,11 +1,18 @@
 package com.example.bsproperty.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
@@ -27,6 +34,13 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tb_bottom)
     TabLayout tbBottom;
 
+    @BindView(R.id.dl_layout)
+    DrawerLayout dlLayout;
+    @BindView(R.id.nv_view)
+    NavigationView nvView;
+
+    private TextView tv_01, tv_02, tv_name;
+
     private long backTime;
     private HomeFragment homeFragment;
     private Fragment02 fragment02;
@@ -35,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
     private MyFragmentPagerAdapter adapter;
     private String[] tabs = new String[]{
-            "首  页", "预  算", "明细查询", "设  置"
+            "1", "2", "3"
     };
 
     @Override
@@ -44,12 +58,10 @@ public class MainActivity extends BaseActivity {
         homeFragment = new HomeFragment();
         fragment02 = new Fragment02();
         fragment03 = new Fragment03();
-        fragment04 = new Fragment04();
         fragments = new ArrayList<>();
         fragments.add(homeFragment);
         fragments.add(fragment02);
         fragments.add(fragment03);
-        fragments.add(fragment04);
 
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         vpContent.setAdapter(adapter);
@@ -63,6 +75,25 @@ public class MainActivity extends BaseActivity {
             }
         }
         tbBottom.setupWithViewPager(vpContent);
+
+        initNav();
+    }
+
+    private void initNav() {
+        tv_01 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_01);
+        tv_02 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_02);
+        tv_name = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_name);
+
+        tv_01.setOnClickListener(new MyClickListener());
+        tv_02.setOnClickListener(new MyClickListener());
+    }
+
+    private class MyClickListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            dlLayout.closeDrawers();
+        }
     }
 
     @Override
@@ -77,6 +108,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        if (dlLayout.isDrawerOpen(nvView)) {
+            dlLayout.closeDrawers();
+            return;
+        }
         if (System.currentTimeMillis() - backTime < 2000) {
             super.onBackPressed();
         } else {
