@@ -2,13 +2,10 @@ package com.example.bsproperty;
 
 import android.app.Application;
 
-import com.example.bsproperty.bean.UserObjBean;
 import com.example.bsproperty.bean.UserBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -52,6 +49,10 @@ public class MyApplication extends Application {
 
     public static String[] getIntypes() {
         return intypes;
+    }
+
+    public UserBean getUserBean() {
+        return userBean;
     }
 
     public void setUserBean(UserBean userBean) {

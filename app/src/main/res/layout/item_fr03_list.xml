@@ -43,17 +43,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/the_space"
             android:text="消费地点：WOWO"
-            android:textColor="@color/text_12"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_04"
-            android:layout_width="match_parent"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/the_space"
-            android:text="账户：支付宝"
+            android:lines="1"
+            android:ellipsize="end"
             android:textColor="@color/text_12"
             android:textSize="12sp" />
 
@@ -64,6 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/the_space"
+        android:lines="1"
+        android:ellipsize="end"
         android:text="消费时间：2018-2-2 12:12:12"
         android:textColor="@color/text_12"
         android:textSize="12sp"

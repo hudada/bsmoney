@@ -10,7 +10,13 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
+import com.example.bsproperty.bean.StatisticsBean;
+import com.example.bsproperty.bean.StatisticsInfoBean;
+import com.example.bsproperty.net.ApiManager;
+import com.example.bsproperty.net.BaseCallBack;
+import com.example.bsproperty.net.OkHttpTools;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -60,41 +66,33 @@ public class Fragment02 extends BaseFragment {
 
     private int type=0;
 
-    protected ArrayList<BBean> mParties = new ArrayList<>();
+    long mStart = 0;
+    long mEnd = 0;
 
-    public class BBean {
-        private String name;
-        private float point;
-
-        public BBean(String name, float point) {
-            this.name = name;
-            this.point = point;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public float getPoint() {
-            return point;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPoint(float point) {
-            SimpleDateFormat f = new SimpleDateFormat("0.00");
-            this.point = Float.parseFloat(f.format(point));
-        }
-    }
+    protected ArrayList<StatisticsBean> mParties = new ArrayList<>();
 
     @Override
     protected void loadData() {
         rb_01.setChecked(true);
-        type=0;
+        type=1;
         tv_title.setText("收支统计");
         btn_back.setText("");
+
+        if (mStart ==0 && mEnd == 0){
+            final Calendar c2 = Calendar.getInstance();
+            mStart = c2.getTime().getTime();
+
+            tvDate01.setText(c2.get(Calendar.YEAR)+"-"+(c2.get(Calendar.MONTH)+1)+"-"
+            +c2.get(Calendar.DATE));
+
+            c2.add(Calendar.MONTH,1);
+            mEnd = c2.getTime().getTime();
+
+            tvDate02.setText(c2.get(Calendar.YEAR)+"-"+(c2.get(Calendar.MONTH)+1)+"-"
+                    +c2.get(Calendar.DATE));
+        }
+
+
         setData();
 
     }
@@ -146,11 +144,10 @@ public class Fragment02 extends BaseFragment {
                 datePickerDialog2.show();
                 break;
             case R.id.btn_add:
-                //TODO 获得数据并展示 显示type已设置 时间戳如下：
                 try {
-                    Date date01=format.parse(tvDate01.getText().toString());
-                    Date date02=format.parse(tvDate02.getText().toString());
-
+                    mStart=format.parse(tvDate01.getText().toString()).getTime();
+                    mEnd=format.parse(tvDate02.getText().toString()).getTime();
+                    setData();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -158,13 +155,13 @@ public class Fragment02 extends BaseFragment {
 
                 break;
             case R.id.rb_01:
-                type=0;
-                break;
-            case R.id.rb_02:
                 type=1;
                 break;
+            case R.id.rb_02:
+                type=0;
+                break;
             case R.id.rb_03:
-                type=2;
+                type=-1;
                 break;
         }
     }
@@ -232,25 +229,31 @@ public class Fragment02 extends BaseFragment {
     }
 
     private void setData() {
+        if (MyApplication.getInstance().getUserBean() == null){
+            return;
+        }
+        OkHttpTools.sendGet(mContext, ApiManager.STATISTICS_TYPE+mStart+"/"+mEnd+"/"+type+"/"+ MyApplication.getInstance().getUserBean().getId())
+                .build()
+                .execute(new BaseCallBack<StatisticsInfoBean>(mContext,StatisticsInfoBean.class) {
+                    @Override
+                    public void onResponse(StatisticsInfoBean statisticsInfoBean) {
+                        if (statisticsInfoBean.getData()!= null && statisticsInfoBean.getData().size() > 0) {
+                            mParties = (ArrayList<StatisticsBean>) statisticsInfoBean.getData();
+                        }else{
+                            mParties.clear();
+                        }
+                        invalidate();
+                    }
+                });
+    }
 
+    private void invalidate() {
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
 
-        for (BBean a : mParties) {
-            entries.add(new PieEntry(a.getPoint(),
+        for (StatisticsBean a : mParties) {
+            entries.add(new PieEntry(Float.parseFloat(a.getMoney()),
                     a.getName()));
         }
-        entries.add(new PieEntry(20f,
-                "123"));
-        entries.add(new PieEntry(20f,
-                "111"));
-        entries.add(new PieEntry(20f,
-                "fdsfd"));
-        entries.add(new PieEntry(20f,
-                "哈哈哈"));
-        entries.add(new PieEntry(20f,
-                "士大夫"));
 
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setSliceSpace(3f);

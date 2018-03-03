@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        MyApplication.getInstance().setUserBean(SpUtils.getUserBean(this));
 
         homeFragment = new HomeActivity();
         fragment02 = new Fragment02();
@@ -85,9 +86,17 @@ public class MainActivity extends BaseActivity {
         tv_04= (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_04);
         tv_name = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_name);
 
+        if (MyApplication.getInstance().getUserBean() != null){
+            tv_01.setVisibility(View.GONE);
+            tv_name.setText(MyApplication.getInstance().getUserBean().getNumber());
+        }else{
+            tv_02.setVisibility(View.GONE);
+        }
+
         tv_01.setOnClickListener(new MyClickListener());
         tv_02.setOnClickListener(new MyClickListener());
         tv_03.setOnClickListener(new MyClickListener());
+        tv_04.setOnClickListener(new MyClickListener());
     }
 
     private class MyClickListener implements View.OnClickListener{
@@ -97,12 +106,14 @@ public class MainActivity extends BaseActivity {
             if (v==tv_01){
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
             }else if(v==tv_02){
-                //TODO 判断登陆状态
                 startActivity(new Intent(MainActivity.this,EditPassActivity.class));
             }else if(v==tv_03){
                 //TODO 换肤
-            }else{
-                //TODO 退出
+            }else if (v == tv_04){
+                if(SpUtils.cleanUserBean(MainActivity.this)){
+                    System.exit(0);
+                }
+
             }
             dlLayout.closeDrawers();
         }
@@ -115,7 +126,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
-        MyApplication.getInstance().setUserBean(SpUtils.getUserBean(this));
+
     }
 
     @Override

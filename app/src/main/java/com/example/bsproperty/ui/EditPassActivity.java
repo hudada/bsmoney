@@ -1,6 +1,7 @@
 package com.example.bsproperty.ui;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +11,11 @@ import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
 import com.example.bsproperty.bean.BaseResponse;
 import com.example.bsproperty.bean.UserBean;
+import com.example.bsproperty.bean.UserInfoBean;
 import com.example.bsproperty.net.ApiManager;
 import com.example.bsproperty.net.BaseCallBack;
 import com.example.bsproperty.net.OkHttpTools;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +30,6 @@ public class EditPassActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.btn_right)
     Button btnRight;
-    @BindView(R.id.tv_number)
-    TextView tvNumber;
     @BindView(R.id.et_pass)
     EditText etPass;
     @BindView(R.id.et_newpass)
@@ -66,23 +67,36 @@ public class EditPassActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.btn_right:
-                if (etPass.getText().toString().equals("")) {
+
+                String oldPass = etPass.getText().toString().trim();
+                String newPass = etNewpass.getText().toString().trim();
+                String newPass2 = etNewpass2.getText().toString().trim();
+
+                if (TextUtils.isEmpty(oldPass)) {
                     showToast(this, "密码不能为空！");
                     return;
                 }
-                if (etNewpass.getText().toString().equals("")) {
+                if (TextUtils.isEmpty(newPass)) {
                     showToast(this, "新密码不能为空！");
                     return;
                 }
-                if (etNewpass2.getText().toString().equals("")) {
-                    showToast(this, "请再次输入新密码！");
-                    return;
-                }
-                if (!etNewpass.getText().toString().equals(etNewpass2.getText().toString())) {
+                if (!newPass.equals(newPass2)) {
                     showToast(this, "两次密码输入不一致！");
                     return;
                 }
-               //TODO 修改密码
+
+                OkHttpTools.sendPost(EditPassActivity.this,ApiManager.MODIFYPWD)
+                        .addParams("oldPass",oldPass)
+                        .addParams("newPass",newPass)
+                        .addParams("number",MyApplication.getInstance().getUserBean().getNumber())
+                        .build()
+                        .execute(new BaseCallBack<BaseResponse>(EditPassActivity.this,BaseResponse.class) {
+                            @Override
+                            public void onResponse(BaseResponse baseResponse) {
+                                showToast(EditPassActivity.this, "修改成功");
+                                finish();
+                            }
+                        });
                 break;
         }
     }

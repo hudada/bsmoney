@@ -18,9 +18,9 @@ import java.io.File;
  */
 
 public class LQRPhotoSelectUtils {
-    public static final int REQ_TAKE_PHOTO = 10001;
-    public static final int REQ_SELECT_PHOTO = 10002;
-    public static final int REQ_ZOOM_PHOTO = 10003;
+    public static final int REQ_TAKE_PHOTO = 521;
+    public static final int REQ_SELECT_PHOTO = 109;
+    public static final int REQ_ZOOM_PHOTO = 5521;
 
     private Activity mActivity;
     //拍照或剪切后图片的存放位置(参考file_provider_paths.xml中的路径)

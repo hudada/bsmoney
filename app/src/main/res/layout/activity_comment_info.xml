@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical"
+    tools:context="com.example.bsproperty.ui.CommentInfoActivity">
+
+
+    <include layout="@layout/top_layout"/>
+
+    <RelativeLayout
+        android:padding="@dimen/the_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fabuzhi"
+            android:textSize="18sp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_below="@+id/tv_name"
+            android:id="@+id/tv_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fabuzhi"
+            android:textSize="18sp"
+            android:textColor="#666666"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/iv_img"
+            android:layout_below="@+id/tv_content"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/ic_launcher"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/the_space"
+        android:paddingRight="@dimen/the_space"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#666666"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/the_space"
+        android:paddingRight="@dimen/the_space"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_re"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="回复内容"/>
+
+        <Button
+            android:id="@+id/btn_re"
+            android:textColorHint="#666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="回复"/>
+    </LinearLayout>
+</LinearLayout>

@@ -10,6 +10,8 @@ import com.zhy.http.okhttp.builder.OtherRequestBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.builder.PostStringBuilder;
 
+import java.io.File;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -66,6 +68,15 @@ public class OkHttpTools {
 
         return OkHttpUtils
                 .post()
+                .url(url);
+    }
+
+    public static PostFormBuilder postFile(Context context, String url, String key, File file){
+        if (context instanceof BaseActivity) {
+            ((BaseActivity) context).showProgress(context);
+        }
+        return OkHttpUtils.post()//
+                .addFile(key, file.getName(), file)//
                 .url(url);
     }
 }

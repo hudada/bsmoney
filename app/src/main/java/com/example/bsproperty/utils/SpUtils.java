@@ -35,7 +35,7 @@ public class SpUtils {
         }
     }
 
-    public static void cleanUserBean(Context context) {
-        getSp(context).edit().putString(ABOUT_USER, "").apply();
+    public static boolean cleanUserBean(Context context) {
+        return getSp(context).edit().putString(ABOUT_USER, "").commit();
     }
 }

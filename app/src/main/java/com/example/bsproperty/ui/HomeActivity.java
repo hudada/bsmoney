@@ -18,6 +18,11 @@ import android.widget.Toast;
 
 import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
+import com.example.bsproperty.bean.BaseResponse;
+import com.example.bsproperty.bean.SaveInfoBean;
+import com.example.bsproperty.net.ApiManager;
+import com.example.bsproperty.net.BaseCallBack;
+import com.example.bsproperty.net.OkHttpTools;
 import com.example.bsproperty.ui.BaseActivity;
 
 import java.text.DecimalFormat;
@@ -157,7 +162,6 @@ public class HomeActivity extends BaseActivity {
                     return;
                 }
 
-                DecimalFormat fd=new DecimalFormat("00.00");
                 String time = tv_date.getText().toString() + " " + tvTime.getText().toString();
                 Date d = new Date();
                 try {
@@ -165,9 +169,25 @@ public class HomeActivity extends BaseActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                // TODO d.getTime() 就是转换好的时间戳  type是类型 isZhichu是是否为支出
-                Toast.makeText(this, "时间戳："+d.getTime()+"type:"+type+" 支出："+isZhichu, Toast.LENGTH_SHORT).show();
-                // TODO 添加一笔
+                int flag = 1;
+                if (isZhichu){
+                    flag = 0;
+                }
+                OkHttpTools.sendPost(HomeActivity.this, ApiManager.ADD_SAVE)
+                        .addParams("flag",flag+"")
+                        .addParams("name",type)
+                        .addParams("money",tvValue.getText().toString())
+                        .addParams("time",d.getTime()+"")
+                        .addParams("address",tvAddress.getText().toString().trim())
+                        .addParams("uid",MyApplication.getInstance().getUserBean().getId())
+                        .build()
+                        .execute(new BaseCallBack<BaseResponse>(HomeActivity.this,BaseResponse.class) {
+                            @Override
+                            public void onResponse(BaseResponse baseResponse) {
+                                showToast(HomeActivity.this,"添加成功");
+                                finish();
+                            }
+                        });
                 break;
             case R.id.btn_back:
                 setResult(RESULT_OK);
