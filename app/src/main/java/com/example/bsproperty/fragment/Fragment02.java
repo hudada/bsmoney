@@ -1,8 +1,14 @@
 package com.example.bsproperty.fragment;
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.example.bsproperty.R;
 import com.github.mikephil.charting.animation.Easing;
@@ -16,30 +22,151 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by yezi on 2018/1/27.
  */
 
 public class Fragment02 extends BaseFragment {
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @BindView(R.id.pc_chart)
     PieChart mChart;
+    @BindView(R.id.tv_date01)
+    TextView tvDate01;
+    @BindView(R.id.tv_date02)
+    TextView tvDate02;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.btn_back)
+    Button btn_back;
+    @BindView(R.id.btn_add)
+    Button btn_add;
+    @BindView(R.id.rb_01)
+    RadioButton rb_01;
+    @BindView(R.id.rb_02)
+    RadioButton rb_02;
+    @BindView(R.id.rb_03)
+    RadioButton rb_03;
 
-    protected String[] mParties = new String[]{
-            "给美特买吃的", "给喔特买本本", "吃的", "喝的"
-    };
+    private int type=0;
+
+    protected ArrayList<BBean> mParties = new ArrayList<>();
+
+    public class BBean {
+        private String name;
+        private float point;
+
+        public BBean(String name, float point) {
+            this.name = name;
+            this.point = point;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public float getPoint() {
+            return point;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPoint(float point) {
+            SimpleDateFormat f = new SimpleDateFormat("0.00");
+            this.point = Float.parseFloat(f.format(point));
+        }
+    }
 
     @Override
     protected void loadData() {
+        rb_01.setChecked(true);
+        type=0;
+        tv_title.setText("收支统计");
+        btn_back.setText("");
         setData();
 
+    }
+
+    @OnClick({R.id.tv_date01, R.id.tv_date02, R.id.btn_add,R.id.rb_01,R.id.rb_02,R.id.rb_03})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_date01:
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int monthOfYear = 0;
+                int dayOfMonth = 1;
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        if (monthOfYear + 1 < 10 && dayOfMonth < 10) {
+                            tvDate01.setText(year + "-0" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                        } else if (monthOfYear + 1 >= 10 && dayOfMonth < 10) {
+                            tvDate01.setText(year + "-" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                        } else if (monthOfYear + 1 < 10 && dayOfMonth >= 10) {
+                            tvDate01.setText(year + "-0" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        } else {
+                            tvDate01.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        }
+                    }
+                }, year, monthOfYear, dayOfMonth);
+                datePickerDialog.show();
+                break;
+            case R.id.tv_date02:
+                final Calendar c2 = Calendar.getInstance();
+                int year2 = c2.get(Calendar.YEAR);
+                int monthOfYear2 = c2.get(Calendar.MONTH);
+                int dayOfMonth2 = c2.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog2 = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        if (monthOfYear + 1 < 10 && dayOfMonth < 10) {
+                            tvDate02.setText(year + "-0" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                        } else if (monthOfYear + 1 >= 10 && dayOfMonth < 10) {
+                            tvDate02.setText(year + "-" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                        } else if (monthOfYear + 1 < 10 && dayOfMonth >= 10) {
+                            tvDate02.setText(year + "-0" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        } else {
+                            tvDate02.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        }
+                    }
+                }, year2, monthOfYear2, dayOfMonth2);
+                datePickerDialog2.show();
+                break;
+            case R.id.btn_add:
+                //TODO 获得数据并展示 显示type已设置 时间戳如下：
+                try {
+                    Date date01=format.parse(tvDate01.getText().toString());
+                    Date date02=format.parse(tvDate02.getText().toString());
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                break;
+            case R.id.rb_01:
+                type=0;
+                break;
+            case R.id.rb_02:
+                type=1;
+                break;
+            case R.id.rb_03:
+                type=2;
+                break;
+        }
     }
 
     @Override
@@ -110,14 +237,20 @@ public class Fragment02 extends BaseFragment {
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
 
-        entries.add(new PieEntry(35f,
-                mParties[0]));
-        entries.add(new PieEntry(22f,
-                mParties[1]));
-        entries.add(new PieEntry(28f,
-                mParties[2]));
-        entries.add(new PieEntry(15f,
-                mParties[3]));
+        for (BBean a : mParties) {
+            entries.add(new PieEntry(a.getPoint(),
+                    a.getName()));
+        }
+        entries.add(new PieEntry(20f,
+                "123"));
+        entries.add(new PieEntry(20f,
+                "111"));
+        entries.add(new PieEntry(20f,
+                "fdsfd"));
+        entries.add(new PieEntry(20f,
+                "哈哈哈"));
+        entries.add(new PieEntry(20f,
+                "士大夫"));
 
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setSliceSpace(3f);
@@ -126,11 +259,11 @@ public class Fragment02 extends BaseFragment {
         // add a lot of colors
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        colors.add(Color.rgb(192, 255, 140));
-        colors.add(Color.rgb(255, 247, 140));
-        colors.add(Color.rgb(255, 208, 140));
-        colors.add(Color.rgb(140, 234, 255));
-
+        colors.add(Color.rgb(255, 165, 0));
+        colors.add(Color.rgb(255, 182, 193));
+        colors.add(Color.rgb(255, 222, 173));
+        colors.add(Color.rgb(144, 238, 144));
+        colors.add(Color.rgb(80, 235, 80));
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
 

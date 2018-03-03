@@ -18,6 +18,7 @@ import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
 import com.example.bsproperty.adapter.BaseAdapter;
 import com.example.bsproperty.ui.HomeActivity;
+import com.example.bsproperty.ui.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,10 +41,17 @@ public class Fragment01 extends BaseFragment {
     TextView tv_date;
     @BindView(R.id.btn_right)
     Button btn_right;
+    @BindView(R.id.btn_back)
+    Button btn_back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.rv_list)
     RecyclerView rvList;
     @BindView(R.id.sl_list)
     SwipeRefreshLayout slList;
+    @BindView(R.id.tv_year)
+    TextView tv_year;
+
     private Fragment01.MyAdapter adapter;
     private String[] outtypes;
     private String[] intypes;
@@ -55,7 +63,8 @@ public class Fragment01 extends BaseFragment {
         outtypes = MyApplication.getInstance().getOuttypes();
         intypes = MyApplication.getInstance().getIntypes();
         btn_right.setText("记一笔");
-
+        tv_title.setText("记    账");
+        btn_back.setText("我  的");
     }
 
     @Override
@@ -73,7 +82,7 @@ public class Fragment01 extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_date, R.id.btn_right})
+    @OnClick({R.id.tv_date, R.id.btn_right,R.id.btn_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_date:
@@ -85,6 +94,7 @@ public class Fragment01 extends BaseFragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         tv_date.setText((monthOfYear + 1) + "月" + dayOfMonth + "日");
+                        tv_year.setText(year+"年");
                         getData();
                         slList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                             @Override
@@ -123,6 +133,9 @@ public class Fragment01 extends BaseFragment {
                 break;
             case R.id.btn_right:
                 startActivityForResult(new Intent(mContext, HomeActivity.class), 521);
+                break;
+            case R.id.btn_back:
+                ((MainActivity)getActivity()).openLeft();
                 break;
         }
     }

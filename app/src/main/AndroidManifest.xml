@@ -29,6 +29,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.HomeActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.EditPassActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

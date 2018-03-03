@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.nv_view)
     NavigationView nvView;
 
-    private TextView tv_01, tv_02,tv_03, tv_name;
+    private TextView tv_01, tv_02,tv_03,tv_04, tv_name;
 
     private long backTime;
     private HomeActivity homeFragment;
@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity {
         tv_01 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_01);
         tv_02 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_02);
         tv_03= (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_03);
+        tv_04= (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_04);
         tv_name = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_name);
 
         tv_01.setOnClickListener(new MyClickListener());
@@ -96,6 +97,9 @@ public class MainActivity extends BaseActivity {
             if (v==tv_01){
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
             }else if(v==tv_02){
+                //TODO 判断登陆状态
+                startActivity(new Intent(MainActivity.this,EditPassActivity.class));
+            }else if(v==tv_03){
                 //TODO 换肤
             }else{
                 //TODO 退出
@@ -149,5 +153,9 @@ public class MainActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             return tabs[position];
         }
+    }
+
+    public void openLeft(){
+        dlLayout.openDrawer(nvView);
     }
 }

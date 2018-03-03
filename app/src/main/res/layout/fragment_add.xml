@@ -90,7 +90,7 @@
                 android:id="@+id/rb_013"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="生活" />
+                android:text="学习" />
 
             <RadioButton
                 android:id="@+id/rb_014"
@@ -206,7 +206,7 @@
                 android:layout_marginLeft="@dimen/the_space"
                 android:background="@null"
                 android:inputType="numberDecimal"
-                android:text="0.00"
+                android:hint="0.00"
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
 
@@ -251,6 +251,12 @@
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼"
+                android:textColor="@color/text_9"
+                android:textSize="@dimen/text_size01" />
+            <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -259,11 +265,9 @@
                 android:text="16:40:22"
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/the_space"
                 android:text="▼"
                 android:textColor="@color/text_9"
                 android:textSize="@dimen/text_size01" />

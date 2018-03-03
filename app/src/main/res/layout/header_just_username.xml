@@ -46,7 +46,7 @@
         android:background="@drawable/btn_ripple"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="个性换肤"
+        android:text="修改密码"
         android:textColor="@color/text_6" />
     <View
         android:layout_width="match_parent"
@@ -54,6 +54,19 @@
         android:background="#999999" />
     <TextView
         android:id="@+id/tv_03"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@drawable/btn_ripple"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="个性换肤"
+        android:textColor="@color/text_6" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#999999" />
+    <TextView
+        android:id="@+id/tv_04"
         android:textSize="20sp"
         android:gravity="center"
         android:background="@drawable/btn_ripple"

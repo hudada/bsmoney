@@ -3,11 +3,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include layout="@layout/top_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:id="@+id/tv_04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
+            android:text="时         间："
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_size03" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_04"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_date01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/the_space"
+                android:text="2018-12-12"
+                android:textColor="@color/text_6"
+                android:textSize="@dimen/text_size02" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼"
+                android:textColor="@color/text_9"
+                android:textSize="@dimen/text_size01" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 至  "
+                android:textColor="@color/text_9"
+                android:textSize="@dimen/text_size02" />
+            <TextView
+                android:id="@+id/tv_date02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="2018-12-12"
+                android:textColor="@color/text_6"
+                android:textSize="@dimen/text_size02" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼"
+                android:textColor="@color/text_9"
+                android:textSize="@dimen/text_size01" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
 
         <TextView
             android:id="@+id/tv_01"
@@ -15,86 +77,47 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/the_space"
-            android:text="本月预算："
+            android:text="统计方式："
             android:textColor="@color/text_3"
             android:textSize="@dimen/text_size03" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/tv_01"
+
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_value"
+            <RadioButton
+                android:id="@+id/rb_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="1000.00"
+                android:checked="true"
+                android:gravity="center_vertical"
+                android:text="收  入"
                 android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
+                android:textSize="16sp" />
 
-            <TextView
+            <RadioButton
+                android:id="@+id/rb_02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="元"
+                android:gravity="center_vertical"
+                android:text="支  出"
                 android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
+                android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rb_03"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="▼"
-                android:textColor="@color/text_9"
-                android:textSize="@dimen/text_size01" />
-        </LinearLayout>
+                android:gravity="center_vertical"
+                android:text="结  余"
+                android:textColor="@color/text_6"
+                android:textSize="16sp" />
+        </RadioGroup>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/tv_02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/the_space"
-            android:text="本月已用："
-            android:textColor="@color/text_3"
-            android:textSize="@dimen/text_size03" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_02"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_now"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="1000.00"
-                android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="元"
-                android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
-
-        </LinearLayout>
-    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_add"
@@ -103,39 +126,13 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/blue_bg"
         android:text="生成统计图"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size03"
         android:textStyle="bold" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/the_space"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/the_space"
-            android:checked="true"
-            android:gravity="center_vertical"
-            android:text="按时间统计"
-            android:textColor="@color/text_6"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rb_02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="按类型统计"
-            android:textColor="@color/text_6"
-            android:textSize="16sp" />
-    </RadioGroup>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pc_chart"

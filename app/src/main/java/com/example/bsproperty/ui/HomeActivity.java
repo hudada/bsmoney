@@ -42,8 +42,10 @@ public class HomeActivity extends BaseActivity {
     EditText tvValue;
     @BindView(R.id.tv_time)
     TextView tvTime;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.tv_date)
-    TextView tvDate;
+    TextView tv_date;
     @BindView(R.id.tv_address)
     EditText tvAddress;
     @BindView(R.id.btn_right)
@@ -82,12 +84,14 @@ public class HomeActivity extends BaseActivity {
     protected void loadData() {
         rb_01.setChecked(true);
         isZhichu=true;
+        btn_right.setText("添加");
         rb_011.setChecked(true);
         type="餐饮";
+        tv_title.setText("新增一笔");
         rl_group02.setVisibility(View.VISIBLE);
         rl_group03.setVisibility(View.GONE);
         String[] time = format.format(new Date()).split(" ");
-        tvDate.setText(time[0]);
+        tv_date.setText(time[0]);
         tvTime.setText(time[1]);
     }
 
@@ -101,7 +105,8 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_time,R.id.btn_right,R.id.btn_back,R.id.tv_date,R.id.rb_01,R.id.rb_02,R.id.rb_011,R.id.rb_012,R.id.rb_013,R.id.rb_014,R.id.rb_015})
+    @OnClick({R.id.tv_time,R.id.btn_right,R.id.btn_back,R.id.tv_date,R.id.rb_01,R.id.rb_02,R.id.rb_011,R.id.rb_012,
+            R.id.rb_013,R.id.rb_014,R.id.rb_015,R.id.rb_021,R.id.rb_022,R.id.rb_023,R.id.rb_024})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case  R.id.tv_date:
@@ -114,13 +119,13 @@ public class HomeActivity extends BaseActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         if (monthOfYear + 1 < 10 && dayOfMonth < 10) {
-                            tvDate.setText(year + "-0" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                            tv_date.setText(year + "-0" + (monthOfYear + 1) + "-0" + dayOfMonth);
                         } else if (monthOfYear + 1 >= 10 && dayOfMonth < 10) {
-                            tvDate.setText(year + "-" + (monthOfYear + 1) + "-0" + dayOfMonth);
+                            tv_date.setText(year + "-" + (monthOfYear + 1) + "-0" + dayOfMonth);
                         } else if (monthOfYear + 1 < 10 && dayOfMonth >= 10) {
-                            tvDate.setText(year + "-0" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            tv_date.setText(year + "-0" + (monthOfYear + 1) + "-" + dayOfMonth);
                         } else {
-                            tvDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            tv_date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         }
                     }
                 }, year, monthOfYear, dayOfMonth);
@@ -147,26 +152,67 @@ public class HomeActivity extends BaseActivity {
                 timePickerDialog.show();
                 break;
             case R.id.btn_right:
-                if (TextUtils.isEmpty(tvValue.getText())) {
+                if (TextUtils.isEmpty(tvValue.getText().toString())) {
                     Toast.makeText(this, "请输入正确金额！", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 DecimalFormat fd=new DecimalFormat("00.00");
-                String time = tvDate.getText().toString() + " " + tvTime.getText().toString();
+                String time = tv_date.getText().toString() + " " + tvTime.getText().toString();
                 Date d = new Date();
                 try {
                     d = format.parse(time);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                // TODO d.getTime() 就是转换好的时间戳
-                Toast.makeText(this, "时间戳："+d.getTime(), Toast.LENGTH_SHORT).show();
+                // TODO d.getTime() 就是转换好的时间戳  type是类型 isZhichu是是否为支出
+                Toast.makeText(this, "时间戳："+d.getTime()+"type:"+type+" 支出："+isZhichu, Toast.LENGTH_SHORT).show();
                 // TODO 添加一笔
                 break;
             case R.id.btn_back:
                 setResult(RESULT_OK);
                 this.finish();
+                break;
+            case R.id.rb_01:
+                isZhichu=true;
+                rb_011.setChecked(true);
+                type=rb_011.getText().toString();
+                rl_group03.setVisibility(View.GONE);
+                rl_group02.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rb_011:
+                type= rb_011.getText().toString();
+                break;
+            case R.id.rb_012:
+                type= rb_012.getText().toString();
+                break;
+            case R.id.rb_013:
+                type= rb_013.getText().toString();
+                break;
+            case R.id.rb_014:
+                type= rb_014.getText().toString();
+                break;
+            case R.id.rb_015:
+                type= rb_015.getText().toString();
+                break;
+            case R.id.rb_02:
+                isZhichu=false;
+                rb_021.setChecked(true);
+                type=rb_021.getText().toString();
+                rl_group02.setVisibility(View.GONE);
+                rl_group03.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rb_021:
+                type= rb_021.getText().toString();
+                break;
+            case R.id.rb_022:
+                type= rb_022.getText().toString();
+                break;
+            case R.id.rb_023:
+                type= rb_023.getText().toString();
+                break;
+            case R.id.rb_024:
+                type= rb_024.getText().toString();
                 break;
         }
     }
