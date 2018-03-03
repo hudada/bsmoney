@@ -5,11 +5,12 @@
     android:background="@color/main_bg"
     android:orientation="vertical">
 
+    <include layout="@layout/top_layout" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_01"
@@ -21,32 +22,159 @@
             android:textColor="@color/text_3"
             android:textSize="@dimen/text_size03" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/group_01"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
             android:layout_toRightOf="@+id/tv_01"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_type"
+            <RadioButton
+                android:id="@+id/rb_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="吃饭"
-                android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
+                android:checked="true"
+                android:text="支  出" />
 
-            <TextView
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rb_02"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/the_space"
-                android:text="▼"
-                android:textColor="@color/text_9"
-                android:textSize="@dimen/text_size01" />
+                android:text="收  入" />
+        </RadioGroup>
 
-        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_group02"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
+            android:text="["
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_size03" />
+
+        <RadioGroup
+            android:id="@+id/group_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_11"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_011"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="餐饮" />
+
+            <RadioButton
+                android:id="@+id/rb_012"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生活" />
+
+            <RadioButton
+                android:id="@+id/rb_013"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生活" />
+
+            <RadioButton
+                android:id="@+id/rb_014"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服装" />
+
+            <RadioButton
+                android:id="@+id/rb_015"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
+            android:layout_toRightOf="@+id/group_02"
+            android:text="]"
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_size03" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_group03"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
+            android:text="["
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_size03" />
+
+        <RadioGroup
+            android:id="@+id/group_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_12"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_021"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工资" />
+
+            <RadioButton
+                android:id="@+id/rb_022"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="奖金" />
+
+            <RadioButton
+                android:id="@+id/rb_023"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="红包" />
+
+            <RadioButton
+                android:id="@+id/rb_024"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/the_space"
+            android:layout_toRightOf="@+id/group_03"
+            android:text="]"
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_size03" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -76,9 +204,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/the_space"
-                android:text="0.00"
                 android:background="@null"
                 android:inputType="numberDecimal"
+                android:text="0.00"
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
 
@@ -92,46 +220,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
 
-        <TextView
-            android:id="@+id/tv_03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/the_space"
-            android:text="收支账户："
-            android:textColor="@color/text_3"
-            android:textSize="@dimen/text_size03" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_03"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="支付宝"
-                android:textColor="@color/text_6"
-                android:textSize="@dimen/text_size03" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/the_space"
-                android:text="▼"
-                android:textColor="@color/text_9"
-                android:textSize="@dimen/text_size01" />
-        </LinearLayout>
-    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -152,14 +241,22 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/tv_04"
             android:orientation="horizontal">
-
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/the_space"
+                android:text="2018-12-12"
+                android:textColor="@color/text_6"
+                android:textSize="@dimen/text_size03" />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/the_space"
-                android:text="2018-12-12 16:40:22"
+                android:text="16:40:22"
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
 
@@ -172,6 +269,7 @@
                 android:textSize="@dimen/text_size01" />
         </LinearLayout>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -182,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/the_space"
-            android:text="地         点："
+            android:text="备         注："
             android:textColor="@color/text_3"
             android:textSize="@dimen/text_size03" />
 
@@ -199,39 +297,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/the_space"
-                android:hint="请输入地点"
                 android:background="@null"
+                android:hint="请输入备注..."
                 android:textColor="@color/text_6"
                 android:textSize="@dimen/text_size03" />
         </LinearLayout>
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="@dimen/the_space"
-        android:layout_marginRight="@dimen/the_space"
-        android:layout_marginTop="50dp"
-        android:background="@color/blue_bg"
-        android:text="记    一    笔"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/the_space"
-        android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_tozhi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="从支付宝获取>>"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/the_space"
-                android:background="@null"
-                android:textColor="@color/blue_bg"
-                android:textSize="@dimen/text_size02" />
     </RelativeLayout>
 </LinearLayout>

@@ -5,15 +5,17 @@ package com.example.bsproperty.bean;
  */
 
 public class UserBean {
+    private String id;
     private String number;
-    private String name;
-    private String tel;
-    private String sex;
-    // 钱包余额
-    private String balance;
-    private String dong;
-    private String dan;
-    private String hao;
+    private String pwd;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;
@@ -23,59 +25,11 @@ public class UserBean {
         this.number = number;
     }
 
-    public String getName() {
-        return name;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBalance() {
-        return balance;
-    }
-
-    public void setBalance(String balance) {
-        this.balance = balance;
-    }
-
-    public String getDong() {
-        return dong;
-    }
-
-    public void setDong(String dong) {
-        this.dong = dong;
-    }
-
-    public String getDan() {
-        return dan;
-    }
-
-    public void setDan(String dan) {
-        this.dan = dan;
-    }
-
-    public String getHao() {
-        return hao;
-    }
-
-    public void setHao(String hao) {
-        this.hao = hao;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

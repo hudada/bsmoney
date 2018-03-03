@@ -5,38 +5,40 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:src="@mipmap/ic_launcher" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:background="@color/blue_bg">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="name"
-        android:textColor="#000000" />
-
+        android:layout_gravity="center_horizontal"
+        android:text="尚未登录"
+        android:layout_marginTop="40dp"
+        android:textSize="22sp"
+        android:textColor="@color/white" />
+</LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="10dp"
         android:background="#999999" />
 
     <TextView
         android:id="@+id/tv_01"
         android:textSize="20sp"
-        android:background="@drawable/btn_ripple"
         android:gravity="center"
+        android:background="@drawable/btn_ripple"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="name"
-        android:textColor="#000000" />
-
+        android:text="账户登陆"
+        android:textColor="@color/text_6" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#999999" />
     <TextView
         android:id="@+id/tv_02"
         android:textSize="20sp"
@@ -44,6 +46,23 @@
         android:background="@drawable/btn_ripple"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="name"
-        android:textColor="#000000" />
+        android:text="个性换肤"
+        android:textColor="@color/text_6" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#999999" />
+    <TextView
+        android:id="@+id/tv_03"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@drawable/btn_ripple"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="退         出"
+        android:textColor="@color/text_6" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#999999" />
 </LinearLayout>

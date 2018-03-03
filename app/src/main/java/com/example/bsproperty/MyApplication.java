@@ -20,23 +20,13 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
 
     private static MyApplication instance;
+    private static String[] outtypes={"餐饮","生活","学习","服装","其他"};
+    private static String[] intypes={"工资","奖金","红包","其他"};
     private UserBean userBean;
-    private static ArrayList<String> outtypes=new ArrayList<>();
-    private static ArrayList<String> intypes=new ArrayList<>();
-    private static ArrayList<String> accs =new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        outtypes.add(0,"吃饭");
-        outtypes.add(1,"看电影");
-        outtypes.add(2,"买东西");
-        intypes.add(0,"零花钱");
-        intypes.add(1,"兼职");
-        intypes.add(2,"红包");
-        accs.add(0,"现金");
-        accs.add(1,"银行卡");
-        accs.add(2,"支付宝");
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("hdd"))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
@@ -56,23 +46,15 @@ public class MyApplication extends Application {
         return instance;
     }
 
-    public UserBean getUserBean() {
-        return userBean;
+    public static String[] getOuttypes() {
+        return outtypes;
+    }
+
+    public static String[] getIntypes() {
+        return intypes;
     }
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
-    }
-
-    public ArrayList<String> getOuttypes() {
-        return outtypes;
-    }
-
-    public ArrayList<String> getIntypes() {
-        return intypes;
-    }
-
-    public ArrayList<String> getAccs() {
-        return accs;
     }
 }

@@ -23,8 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.TypeSelectActivity" />
-        <activity android:name=".ui.AccSelectActivity"></activity>
+        <activity android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.HomeActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
