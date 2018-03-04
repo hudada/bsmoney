@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/the_space"
             android:text="的回复"
             android:textColor="@color/text_6"
             android:textSize="@dimen/text_size02" />
@@ -24,7 +23,6 @@
             android:gravity="right"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/the_space"
             android:text="2018-2-2 12:12:12"
             android:textStyle="bold"
             android:textColor="@color/text_9"
@@ -42,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/the_space"
             android:text="内容"
             android:lines="1"
             android:ellipsize="end"

@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,21 +81,32 @@ public class Fragment02 extends BaseFragment {
 
         if (mStart ==0 && mEnd == 0){
             final Calendar c2 = Calendar.getInstance();
-            mStart = c2.getTime().getTime();
 
-            tvDate01.setText(c2.get(Calendar.YEAR)+"-"+(c2.get(Calendar.MONTH)+1)+"-"
-            +c2.get(Calendar.DATE));
+            tvDate01.setText(format.format(c2.getTime()));
 
             c2.add(Calendar.MONTH,1);
-            mEnd = c2.getTime().getTime();
 
-            tvDate02.setText(c2.get(Calendar.YEAR)+"-"+(c2.get(Calendar.MONTH)+1)+"-"
-                    +c2.get(Calendar.DATE));
+            tvDate02.setText(format.format(c2.getTime()));
+
+            try {
+                mStart=format.parse(tvDate01.getText().toString()).getTime();
+                mEnd=format.parse(tvDate02.getText().toString()).getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
 
-        setData();
 
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            setData();
+        }
     }
 
     @OnClick({R.id.tv_date01, R.id.tv_date02, R.id.btn_add,R.id.rb_01,R.id.rb_02,R.id.rb_03})
@@ -103,8 +115,8 @@ public class Fragment02 extends BaseFragment {
             case R.id.tv_date01:
                 final Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
-                int monthOfYear = 0;
-                int dayOfMonth = 1;
+                int monthOfYear = c.get(Calendar.MONTH);
+                int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -116,6 +128,13 @@ public class Fragment02 extends BaseFragment {
                             tvDate01.setText(year + "-0" + (monthOfYear + 1) + "-" + dayOfMonth);
                         } else {
                             tvDate01.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        }
+                        try {
+                            mStart=format.parse(tvDate01.getText().toString()).getTime();
+                            mEnd=format.parse(tvDate02.getText().toString()).getTime();
+                            setData();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                     }
                 }, year, monthOfYear, dayOfMonth);
@@ -139,6 +158,13 @@ public class Fragment02 extends BaseFragment {
                         } else {
                             tvDate02.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         }
+                        try {
+                            mStart=format.parse(tvDate01.getText().toString()).getTime();
+                            mEnd=format.parse(tvDate02.getText().toString()).getTime();
+                            setData();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, year2, monthOfYear2, dayOfMonth2);
                 datePickerDialog2.show();
@@ -156,12 +182,15 @@ public class Fragment02 extends BaseFragment {
                 break;
             case R.id.rb_01:
                 type=1;
+                setData();
                 break;
             case R.id.rb_02:
                 type=0;
+                setData();
                 break;
             case R.id.rb_03:
                 type=-1;
+                setData();
                 break;
         }
     }
@@ -215,6 +244,7 @@ public class Fragment02 extends BaseFragment {
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
+        l.setWordWrapEnabled(true);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setXOffset(0f);
@@ -252,7 +282,7 @@ public class Fragment02 extends BaseFragment {
 
         for (StatisticsBean a : mParties) {
             entries.add(new PieEntry(Float.parseFloat(a.getMoney()),
-                    a.getName()));
+                    a.getName() + " " + a.getMoney()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -262,11 +292,8 @@ public class Fragment02 extends BaseFragment {
         // add a lot of colors
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        colors.add(Color.rgb(255, 165, 0));
-        colors.add(Color.rgb(255, 182, 193));
-        colors.add(Color.rgb(255, 222, 173));
-        colors.add(Color.rgb(144, 238, 144));
-        colors.add(Color.rgb(80, 235, 80));
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
 

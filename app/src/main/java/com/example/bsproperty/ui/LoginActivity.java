@@ -12,11 +12,14 @@ import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
 import com.example.bsproperty.bean.UserBean;
 import com.example.bsproperty.bean.UserInfoBean;
+import com.example.bsproperty.eventbus.LoginEvent;
 import com.example.bsproperty.net.ApiManager;
 import com.example.bsproperty.net.BaseCallBack;
 import com.example.bsproperty.net.OkHttpTools;
 import com.example.bsproperty.utils.SpUtils;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,6 +83,7 @@ public class LoginActivity extends BaseActivity {
                                 showToast(LoginActivity.this,"登陆成功");
                                 SpUtils.setUserBean(LoginActivity.this,userInfoBean.getData());
                                 MyApplication.getInstance().setUserBean(userInfoBean.getData());
+                                EventBus.getDefault().post(new LoginEvent());
                                 finish();
                             }
                         });

@@ -14,10 +14,15 @@ import android.widget.TextView;
 
 import com.example.bsproperty.MyApplication;
 import com.example.bsproperty.R;
+import com.example.bsproperty.eventbus.LoginEvent;
 import com.example.bsproperty.fragment.Fragment02;
 import com.example.bsproperty.fragment.Fragment01;
 import com.example.bsproperty.fragment.Fragment04;
 import com.example.bsproperty.utils.SpUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -51,6 +56,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         MyApplication.getInstance().setUserBean(SpUtils.getUserBean(this));
 
         homeFragment = new HomeActivity();
@@ -79,6 +85,18 @@ public class MainActivity extends BaseActivity {
         initNav();
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
+        initLeftNav();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
     private void initNav() {
         tv_01 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_01);
         tv_02 = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_02);
@@ -86,17 +104,23 @@ public class MainActivity extends BaseActivity {
         tv_04= (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_04);
         tv_name = (TextView) nvView.getHeaderView(0).findViewById(R.id.tv_name);
 
-        if (MyApplication.getInstance().getUserBean() != null){
-            tv_01.setVisibility(View.GONE);
-            tv_name.setText(MyApplication.getInstance().getUserBean().getNumber());
-        }else{
-            tv_02.setVisibility(View.GONE);
-        }
+        initLeftNav();
+
 
         tv_01.setOnClickListener(new MyClickListener());
         tv_02.setOnClickListener(new MyClickListener());
         tv_03.setOnClickListener(new MyClickListener());
         tv_04.setOnClickListener(new MyClickListener());
+    }
+
+    private void initLeftNav() {
+        if (MyApplication.getInstance().getUserBean() != null){
+            tv_01.setVisibility(View.GONE);
+            tv_name.setText(MyApplication.getInstance().getUserBean().getNumber());
+            tv_02.setVisibility(View.VISIBLE);
+        }else{
+            tv_02.setVisibility(View.GONE);
+        }
     }
 
     private class MyClickListener implements View.OnClickListener{

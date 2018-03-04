@@ -44,4 +44,5 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.2' // add library
     compile 'com.lovedise:permissiongen:0.0.6'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.greenrobot:eventbus:3.1.1'
 }

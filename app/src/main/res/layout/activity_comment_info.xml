@@ -18,28 +18,31 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@+id/iv_img"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="fabuzhi"
+            android:ellipsize="end"
+            android:lines="1"
             android:textSize="18sp"
             android:textColor="#000000"/>
         <TextView
             android:layout_below="@+id/tv_name"
             android:id="@+id/tv_content"
+            android:layout_toLeftOf="@+id/iv_img"
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="fabuzhi"
             android:textSize="18sp"
             android:textColor="#666666"/>
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/iv_img"
-            android:layout_below="@+id/tv_content"
-            android:layout_marginTop="10dp"
-            android:background="@mipmap/ic_launcher"/>
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_launcher"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

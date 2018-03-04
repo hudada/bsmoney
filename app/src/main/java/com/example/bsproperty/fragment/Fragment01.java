@@ -138,8 +138,12 @@ public class Fragment01 extends BaseFragment {
                             tvOut.setText(saveInfoBean.getData().getTotOut()+"");
                             tvAll.setText(saveInfoBean.getData().getTotTwo()+"");
                             mData.addAll(saveInfoBean.getData().getData());
-                            adapter.notifyDataSetChanged(mData);
+                        }else{
+                            tvIn.setText("0.0");
+                            tvOut.setText("0.0");
+                            tvAll.setText("0.0");
                         }
+                        adapter.notifyDataSetChanged(mData);
                     }
                 });
     }
@@ -183,8 +187,7 @@ public class Fragment01 extends BaseFragment {
                                         .execute(new BaseCallBack<BaseResponse>(mContext, BaseResponse.class) {
                                             @Override
                                             public void onResponse(BaseResponse baseResponse) {
-                                                mData.remove(position);
-                                                adapter.notifyItemRemoved(position);
+                                                loadWebData();
                                             }
                                         });
                             }
@@ -218,7 +221,7 @@ public class Fragment01 extends BaseFragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         int month = monthOfYear + 1;
-                        tv_date.setText(month + "月" + dayOfMonth + "日");
+                        tv_date.setText(month + "月" + dayOfMonth + "日 ▼");
                         tv_year.setText(year+"年");
                         mStart = year + "-" + month + "-" + dayOfMonth;
                         Calendar calendar = Calendar.getInstance();
@@ -230,7 +233,7 @@ public class Fragment01 extends BaseFragment {
 
                         int monthE = monthOfYearE + 1;
                         mEnd = yearE + "-" + monthE + "-" + dayOfMonthE;
-                        loadData();
+                        loadWebData();
                     }
                 }, year2, monthOfYear2, dayOfMonth2);
                 datePickerDialog2.show();
@@ -265,7 +268,7 @@ public class Fragment01 extends BaseFragment {
                 money.setText("+"+saveBean.getMoney()+"元");
                 money.setTextColor(getResources().getColor(R.color.redd));
             }
-            holder.setText(R.id.tv_03,"消费地点："+saveBean.getAddress());
+            holder.setText(R.id.tv_03,"备注："+saveBean.getAddress());
             holder.setText(R.id.tv_05,"消费时间："+format.format(new Date(saveBean.getTime())));
         }
     }

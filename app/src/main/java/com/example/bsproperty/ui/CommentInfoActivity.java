@@ -74,7 +74,12 @@ public class CommentInfoActivity extends BaseActivity {
 
         tvName.setText(commentBean.getName());
         tvContent.setText(commentBean.getContent());
-        Glide.with(this).load(ApiManager.IMG+commentBean.getImg()).into(ivImg);
+        if (TextUtils.isEmpty(commentBean.getImg())){
+            ivImg.setVisibility(View.GONE);
+        }else{
+            Glide.with(this).load(ApiManager.IMG+commentBean.getImg()).into(ivImg);
+        }
+
 
         OkHttpTools.sendGet(this,ApiManager.RECOMMENT_LIST+commentBean.getId())
                 .build()
