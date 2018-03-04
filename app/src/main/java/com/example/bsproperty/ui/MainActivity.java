@@ -119,6 +119,8 @@ public class MainActivity extends BaseActivity {
             tv_name.setText(MyApplication.getInstance().getUserBean().getNumber());
             tv_02.setVisibility(View.VISIBLE);
         }else{
+            tv_name.setText("尚未登陆");
+            tv_01.setVisibility(View.VISIBLE);
             tv_02.setVisibility(View.GONE);
         }
     }

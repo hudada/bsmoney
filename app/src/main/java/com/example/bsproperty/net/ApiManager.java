@@ -33,7 +33,9 @@ public class ApiManager {
 
     public static final String COMMENT_LIST = HOST + API + COMMENT + "/list";
     public static final String COMMENT_ADD = HOST + API + COMMENT + "/add";
+    public static final String COMMENT_ADD_IMG = HOST + API + COMMENT + "/addwithimg";
 
     public static final String RECOMMENT_LIST = HOST + API + RECOMMENT + "/list/";
     public static final String RECOMMENT_ADD = HOST + API + RECOMMENT + "/add";
+
 }

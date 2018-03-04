@@ -91,7 +91,7 @@ public class SendCommentActivity extends BaseActivity {
                 if (mFile == null){
                     postFormBuilder = OkHttpTools.sendPost(SendCommentActivity.this,ApiManager.COMMENT_ADD);
                 }else{
-                    postFormBuilder = OkHttpTools.postFile(SendCommentActivity.this, ApiManager.COMMENT_ADD,
+                    postFormBuilder = OkHttpTools.postFile(SendCommentActivity.this, ApiManager.COMMENT_ADD_IMG,
                             "file",mFile);
                 }
                 postFormBuilder.addParams("name", MyApplication.getInstance().getUserBean().getNumber())

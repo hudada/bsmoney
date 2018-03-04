@@ -22,6 +22,7 @@ import com.example.bsproperty.bean.BaseResponse;
 import com.example.bsproperty.bean.SaveBean;
 import com.example.bsproperty.bean.SaveInfoBean;
 import com.example.bsproperty.bean.SaveListBean;
+import com.example.bsproperty.eventbus.LoginEvent;
 import com.example.bsproperty.net.ApiManager;
 import com.example.bsproperty.net.BaseCallBack;
 import com.example.bsproperty.net.OkHttpTools;
@@ -29,6 +30,10 @@ import com.example.bsproperty.ui.HomeActivity;
 import com.example.bsproperty.ui.LoginActivity;
 import com.example.bsproperty.ui.MainActivity;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -126,6 +131,10 @@ public class Fragment01 extends BaseFragment {
         }
 
         if (MyApplication.getInstance().getUserBean() == null){
+            tvIn.setText("0.0");
+            tvOut.setText("0.0");
+            tvAll.setText("0.0");
+            adapter.notifyDataSetChanged(mData);
             return;
         }
         OkHttpTools.sendGet(mContext, ApiManager.MONEY_LIST+start+"/"+end+"/"+MyApplication.getInstance().getUserBean().getId())

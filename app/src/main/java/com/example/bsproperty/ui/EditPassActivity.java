@@ -12,10 +12,14 @@ import com.example.bsproperty.R;
 import com.example.bsproperty.bean.BaseResponse;
 import com.example.bsproperty.bean.UserBean;
 import com.example.bsproperty.bean.UserInfoBean;
+import com.example.bsproperty.eventbus.LoginEvent;
 import com.example.bsproperty.net.ApiManager;
 import com.example.bsproperty.net.BaseCallBack;
 import com.example.bsproperty.net.OkHttpTools;
+import com.example.bsproperty.utils.SpUtils;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,7 +97,10 @@ public class EditPassActivity extends BaseActivity {
                         .execute(new BaseCallBack<BaseResponse>(EditPassActivity.this,BaseResponse.class) {
                             @Override
                             public void onResponse(BaseResponse baseResponse) {
-                                showToast(EditPassActivity.this, "修改成功");
+                                showToast(EditPassActivity.this, "修改成功，请重新登陆");
+                                MyApplication.getInstance().setUserBean(null);
+                                SpUtils.cleanUserBean(EditPassActivity.this);
+                                EventBus.getDefault().post(new LoginEvent());
                                 finish();
                             }
                         });
